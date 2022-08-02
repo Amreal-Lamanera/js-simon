@@ -20,31 +20,8 @@ setTimeout(() => {
         // console.log(urNumbers);
         // console.log(numbers.includes(parseInt(urNumbers[0])));
 
-        // SE ha inserito esattamente 5 valori
-        if (urNumbers.length === numbers.length) {
-            // variabile per il punteggio
-            let counter = 0;
-            // PER ogni elemento inserito
-            urNumbers.forEach(element => {
-                // n = al valore inserito trasformato in intero
-                const n = parseInt(element);
-                // SE non è NaN
-                if (!isNaN(n)) {
-                    // SE è un numero presente fra quelli generati
-                    if (numbers.includes(n)) {
-                        // incremento il punteggio
-                        counter++;
-                    }
-                    // preparo il messaggio a schermo
-                    message = counter;
-                } else { // ALTRIMENTI (valore inserito non valido)
-                    // preparo il messaggio a schermo
-                    message = 'hai inserito qualche valore non numerico!';
-                    // interrompo il ciclo
-                    return;
-                }
-            });
-        }
+        // funzione che genera il messaggio col punteggio
+        checkResult(urNumbers);
     } else { // ALTRIMENTI (annullato)
         // preparo il messaggio a schermo
         message = 'Hai annullato';
@@ -56,8 +33,36 @@ setTimeout(() => {
     }
     // stampo il messaggio
     resultEl.innerHTML = message;
+}, 300)
 
-}, 30000)
+// funzione che genera il messaggio col punteggio
+function checkResult(urNumbers) {
+    // SE ha inserito esattamente 5 valori
+    if (urNumbers.length === numbers.length) {
+        // variabile per il punteggio
+        let counter = 0;
+        // PER ogni elemento inserito
+        urNumbers.forEach(element => {
+            // n = al valore inserito trasformato in intero
+            const n = parseInt(element);
+            // SE non è NaN
+            if (!isNaN(n)) {
+                // SE è un numero presente fra quelli generati
+                if (numbers.includes(n)) {
+                    // incremento il punteggio
+                    counter++;
+                }
+                // preparo il messaggio a schermo
+                message = counter;
+            } else { // ALTRIMENTI (valore inserito non valido)
+                // preparo il messaggio a schermo
+                message = 'hai inserito qualche valore non numerico!';
+                // interrompo il ciclo
+                return;
+            }
+        })
+    }
+}
 
 // funzione che genera 5 numeri casuali sotto forma di stringa
 function randomNumbers() {
