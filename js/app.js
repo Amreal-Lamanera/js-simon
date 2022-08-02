@@ -36,11 +36,11 @@ setTimeout(() => {
         message = 'Hai annullato';
     }
     if (message === 5) {
-        message += ' PERFECT!'
+        message += ' PERFECT!';
     }
     resultEl.innerHTML = message;
 
-}, 300)
+}, 30000)
 
 // funzione che genera 5 numeri casuali sotto forma di stringa
 function randomNumbers() {
