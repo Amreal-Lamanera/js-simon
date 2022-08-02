@@ -40,7 +40,7 @@ setTimeout(() => {
     }
     resultEl.innerHTML = message;
 
-}, 30000)
+}, 300)
 
 // funzione che genera 5 numeri casuali sotto forma di stringa
 function randomNumbers() {
