@@ -1,5 +1,19 @@
 // console.log('ok');
 
+// funzione che genera 5 numeri casuali sotto forma di stringa
+const randomNumbers = () => {
+    const myNumbers = [];
+    while (myNumbers.length < 5) {
+        const n = Math.floor(Math.random() * 100 + 1);
+        // console.log(n);
+        if (!myNumbers.includes(n)) {
+            myNumbers.push(n);
+        }
+    }
+    // console.log(myNumbers);
+    return myNumbers;
+}
+
 const numbers = randomNumbers();
 let resultEl = document.getElementById('result');
 alert('Cerca di ricordare questi numeri: ' + numbers.join(', '));
@@ -62,18 +76,4 @@ function checkResult(urNumbers) {
             }
         })
     }
-}
-
-// funzione che genera 5 numeri casuali sotto forma di stringa
-function randomNumbers() {
-    const myNumbers = [];
-    while (myNumbers.length < 5) {
-        const n = Math.floor(Math.random() * 100 + 1);
-        // console.log(n);
-        if (!myNumbers.includes(n)) {
-            myNumbers.push(n);
-        }
-    }
-    // console.log(myNumbers);
-    return myNumbers;
 }
