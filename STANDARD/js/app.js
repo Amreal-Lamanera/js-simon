@@ -47,7 +47,7 @@ setTimeout(() => {
     }
     // stampo il messaggio
     resultEl.innerHTML = message;
-}, 300)
+}, 30000)
 
 // funzione che genera il messaggio col punteggio
 function checkResult(urNumbers) {
