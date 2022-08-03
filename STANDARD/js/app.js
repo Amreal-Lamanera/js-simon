@@ -1,9 +1,9 @@
 // console.log('ok');
 
-// funzione che genera 5 numeri casuali sotto forma di stringa
-const randomNumbers = () => {
+// funzione che genera n numeri casuali in un array
+const randomNumbers = (n) => {
     const myNumbers = [];
-    while (myNumbers.length < 5) {
+    while (myNumbers.length < n) {
         const n = Math.floor(Math.random() * 100 + 1);
         // console.log(n);
         if (!myNumbers.includes(n)) {
@@ -14,7 +14,7 @@ const randomNumbers = () => {
     return myNumbers;
 }
 
-const numbers = randomNumbers();
+const numbers = randomNumbers(5);
 let resultEl = document.getElementById('result');
 alert('Cerca di ricordare questi numeri: ' + numbers.join(', '));
 let message = 'devi inserire ESATTAMENTE 5 numeri - ricarica per riprovare';
@@ -38,27 +38,21 @@ setTimeout(() => {
         // console.log(urNumbers);
         // console.log(numbers.includes(parseInt(urNumbers[0])));
 
-        // funzione che genera il messaggio col punteggio
-        checkResult(urNumbers);
+        // funzione che genera il messaggio col punteggio e un array coi numeri indovinati
+        let okNumbers = [];
+        checkResult(urNumbers, okNumbers);
     } else { // ALTRIMENTI (annullato)
         // preparo il messaggio a schermo
         message = 'Hai annullato';
     }
-    // SE li ha azzeccati tutti
-    if (message === 5) {
-        // aggiungo perfect
-        message += ' PERFECT!';
-    }
     // stampo il messaggio
     resultEl.innerHTML = message;
-}, delay)
+}, debugDelay)
 
 // funzione che genera il messaggio col punteggio
-function checkResult(urNumbers) {
+function checkResult(urNumbers, okNumbers) {
     // SE ha inserito esattamente 5 valori
     if (urNumbers.length === numbers.length) {
-        // variabile per il punteggio
-        let counter = 0;
         // PER ogni elemento inserito
         urNumbers.forEach(element => {
             // n = al valore inserito trasformato in intero
@@ -68,10 +62,10 @@ function checkResult(urNumbers) {
                 // SE è un numero presente fra quelli generati
                 if (numbers.includes(n)) {
                     // incremento il punteggio
-                    counter++;
+                    okNumbers.push(n);
                 }
                 // preparo il messaggio a schermo
-                message = counter;
+                message = okNumbers.length + ' numeri indovinati => ' + okNumbers.join(', ');
             } else { // ALTRIMENTI (valore inserito non valido)
                 // preparo il messaggio a schermo
                 message = 'hai inserito qualche valore non numerico!';
