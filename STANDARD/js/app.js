@@ -18,6 +18,10 @@ const numbers = randomNumbers();
 let resultEl = document.getElementById('result');
 alert('Cerca di ricordare questi numeri: ' + numbers.join(', '));
 let message = 'devi inserire ESATTAMENTE 5 numeri - ricarica per riprovare';
+// ritardo per timeout 30s x 1000   => 30000ms
+const delay = 30 * 1000;
+// ritardo per timeout per le prove => 300ms
+const debugDelay = 30 * 10;
 
 setTimeout(() => {
     // prendo l'input dall'utente col prompt
@@ -47,7 +51,7 @@ setTimeout(() => {
     }
     // stampo il messaggio
     resultEl.innerHTML = message;
-}, 30000)
+}, delay)
 
 // funzione che genera il messaggio col punteggio
 function checkResult(urNumbers) {
