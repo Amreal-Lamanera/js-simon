@@ -54,81 +54,30 @@ const pointerWrapperElement = [];
 for (let i = 0; i < slideElements.length; i++) {
     pointerWrapperElement[i] = document.getElementById(i);
 
-    pointerWrapperElement[i].addEventListener('click', function () {
-        // se muovo slider resetto timer e lo faccio ripartire
-        clearInterval(myInterval);
-        myInterval = setInterval(nextFun, 3000);
+    pointerWrapperElement[i].addEventListener('click', goTo.bind(pointerWrapperElement, i)
+        // function () {
+        //     // se muovo slider resetto timer e lo faccio ripartire
+        //     resetInterval();
 
-        // togliere active dal pointer attivo
-        pointerWrapperElement[indexAct].classList.remove('active');
-        // togliere active dalla slide attiva
-        slideElements[indexAct].classList.remove('active');
+        //     // togliere active dal pointer attivo
+        //     pointerWrapperElement[indexAct].classList.remove('active');
+        //     // togliere active dalla slide attiva
+        //     slideElements[indexAct].classList.remove('active');
 
-        // aggiungere la classe active al pointer selezionato
-        indexAct = i;
-        pointerWrapperElement[indexAct].classList.add('active');
+        //     // aggiungere la classe active al pointer selezionato
+        //     indexAct = i;
+        //     pointerWrapperElement[indexAct].classList.add('active');
 
 
-        // aggiungere la classe active alla slide corrispondente al pointer clickato
-        slideElements[indexAct].classList.add('active');
+        //     // aggiungere la classe active alla slide corrispondente al pointer clickato
+        //     slideElements[indexAct].classList.add('active');
 
-    })
+        // }
+    )
 };
 
 // implementare freccia right
 const nextElement = document.querySelector('.arrow-next');
-
-function nextFun() {
-    // se muovo slider resetto timer e lo faccio ripartire
-    clearInterval(myInterval);
-    myInterval = setInterval(nextFun, 3000);
-
-    // togliere active dalla slide attiva
-    slideElements[indexAct].classList.remove('active');
-    // togliere active dal pointer attivo
-    pointerWrapperElement[indexAct].classList.remove('active');
-
-    // aggiungere la classe active alla slide successiva (se esiste)
-    if (indexAct === slideElements.length - 1) {
-        // riparto dalla prima slide => azzero index
-        indexAct = 0;
-        // cambio slide all'index
-        slideElements[indexAct].classList.add('active');
-        // cambio pointer all'index
-        pointerWrapperElement[indexAct].classList.add('active');
-    } else {
-        // passo alla slide successiva
-        slideElements[++indexAct].classList.add('active');
-        // passo al pointer successivo
-        pointerWrapperElement[indexAct].classList.add('active');
-    }
-};
-
-function prevFun() {
-    // se muovo slider resetto timer e lo faccio ripartire
-    clearInterval(myInterval);
-    myInterval = setInterval(nextFun, 3000);
-
-    // togliere active dalla slide attiva
-    slideElements[indexAct].classList.remove('active');
-    // togliere active dal pointer attivo
-    pointerWrapperElement[indexAct].classList.remove('active');
-
-    // aggiungere la classe active alla slide precedente (se esiste)
-    if (indexAct === 0) {
-        // passo all'ultima slide
-        indexAct = slideElements.length - 1;
-        // cambio slide all'index
-        slideElements[indexAct].classList.add('active');
-        // cambio pointer all'index
-        pointerWrapperElement[indexAct].classList.add('active');
-    } else {
-        // passo alla slide precedente
-        slideElements[--indexAct].classList.add('active');
-        // passo al pointer successivo
-        pointerWrapperElement[indexAct].classList.add('active');
-    }
-};
 
 nextElement.addEventListener('click', nextFun);
 
@@ -136,3 +85,80 @@ nextElement.addEventListener('click', nextFun);
 const prevElement = document.querySelector('.arrow-prev');
 
 prevElement.addEventListener('click', prevFun);
+
+function goTo(i) {
+    // se muovo slider resetto timer e lo faccio ripartire
+    resetInterval();
+
+    // togliere active dal pointer attivo
+    pointerWrapperElement[indexAct].classList.remove('active');
+    // togliere active dalla slide attiva
+    slideElements[indexAct].classList.remove('active');
+
+    // aggiungere la classe active al pointer selezionato
+    indexAct = i;
+    pointerWrapperElement[indexAct].classList.add('active');
+
+
+    // aggiungere la classe active alla slide corrispondente al pointer clickato
+    slideElements[indexAct].classList.add('active');
+}
+
+function nextFun() {
+    // // se muovo slider resetto timer e lo faccio ripartire
+    // resetInterval();
+
+    // // togliere active dalla slide attiva
+    // slideElements[indexAct].classList.remove('active');
+    // // togliere active dal pointer attivo
+    // pointerWrapperElement[indexAct].classList.remove('active');
+
+    // aggiungere la classe active alla slide successiva (se esiste)
+    if (indexAct === slideElements.length - 1) {
+        goTo(0);
+        // // riparto dalla prima slide => azzero index
+        // indexAct = 0;
+        // // cambio slide all'index
+        // slideElements[indexAct].classList.add('active');
+        // // cambio pointer all'index
+        // pointerWrapperElement[indexAct].classList.add('active');
+    } else {
+        // // passo alla slide successiva
+        // slideElements[++indexAct].classList.add('active');
+        // // passo al pointer successivo
+        // pointerWrapperElement[indexAct].classList.add('active');
+        goTo(indexAct + 1);
+    }
+};
+
+function prevFun() {
+    // // se muovo slider resetto timer e lo faccio ripartire
+    // resetInterval();
+
+    // // togliere active dalla slide attiva
+    // slideElements[indexAct].classList.remove('active');
+    // // togliere active dal pointer attivo
+    // pointerWrapperElement[indexAct].classList.remove('active');
+
+    // aggiungere la classe active alla slide precedente (se esiste)
+    if (indexAct === 0) {
+        goTo(slideElements.length - 1)
+        // // passo all'ultima slide
+        // indexAct = slideElements.length - 1;
+        // // cambio slide all'index
+        // slideElements[indexAct].classList.add('active');
+        // // cambio pointer all'index
+        // pointerWrapperElement[indexAct].classList.add('active');
+    } else {
+        goTo(indexAct - 1)
+        // // passo alla slide precedente
+        // slideElements[--indexAct].classList.add('active');
+        // // passo al pointer successivo
+        // pointerWrapperElement[indexAct].classList.add('active');
+    }
+}
+
+function resetInterval() {
+    clearInterval(myInterval);
+    myInterval = setInterval(nextFun, 3000);
+}
